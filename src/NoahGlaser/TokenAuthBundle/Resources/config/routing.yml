@@ -1,0 +1,14 @@
+noah_glaser_token_auth:
+    path:     /token/generate_token
+    defaults: { _controller: NoahGlaserTokenAuthBundle:Token:generateToken }
+
+noah_glaser_token_user_login_check:
+    path: /login_check
+   
+    
+noah_glaser_bad_login:
+    path: /login_failure
+    defaults: { _controller: NoahGlaserTokenAuthBundle:Token:loginFailure }
+
+noah_glaser_logout:
+    path: /logout

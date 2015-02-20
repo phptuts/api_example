@@ -1,0 +1,12 @@
+users:
+    type: rest
+    resource: API\VersionOneBundle\Controller\UserController
+    name_prefix:  api_1_ # naming collision
+
+properties_users:
+    type: rest
+    parent:   users
+    resource: API\VersionOneBundle\Controller\UserProperteryController
+    name_prefix:  api_1_ # naming collision
+
+    

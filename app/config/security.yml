@@ -1,0 +1,58 @@
+security:
+    
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+    
+    encoders:
+        API\DatabaseBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 14
+        
+    providers:
+        
+        api_db_user_provider:
+            entity: { class: API\DatabaseBundle\Entity\User,  property: email  }
+
+        api_key_user_provider:
+            id: api_key_user_provider
+
+    firewalls:
+        
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        
+#        token_auth:
+#            pattern: /token/generate_token
+#            security: true
+#            form_login: false
+#            anonymous: false
+#            http_basic:
+#                provider: api_db_user_provider
+
+        
+        
+        token_auth_part_one:
+            pattern: ^/token
+            anonymous: true
+            security: true
+            
+            form_login:
+                check_path: /token/login_check
+                login_path: ~
+                use_forward:    false
+                success_handler: noahglaser.tokenauth.security.loginsuccesshandler
+                failure_path:   null
+            logout:
+                path:   /logout
+                target: / 
+                
+        api_security:
+            pattern: ^/api/*
+            stateless: true
+            simple_preauth:
+                authenticator: apikey_authenticator
+        
+        
+    access_control:
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

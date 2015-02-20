@@ -1,0 +1,14 @@
+noah_glaser_token_auth:
+    resource: "@NoahGlaserTokenAuthBundle/Resources/config/routing.yml"
+    prefix:   /token
+
+api_version_one:
+    type: rest
+    resource: "@APIVersionOneBundle/Resources/config/routing.yml"
+    prefix:   /api/v1
+     
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /documentation
+

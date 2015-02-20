@@ -1,0 +1,7 @@
+services:
+    api.database.entity.repo.user:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - API\DatabaseBundle\Entity\User

@@ -1,0 +1,24 @@
+    
+services:
+    noahglaser.tokenauth.entity.repo.token:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - NoahGlaser\TokenAuthBundle\Entity\Token
+    noahglaser.tokenauth.entity.repo.client:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - NoahGlaser\TokenAuthBundle\Entity\Client
+
+    noahglaser.tokenauth.security.apigeneratetoken:
+        class:  NoahGlaser\TokenAuthBundle\Security\ApiGenerateToken
+        arguments:  [ @noahglaser.tokenauth.entity.repo.client, @doctrine.orm.entity_manager, '%noah_glaser_token_auth_number_of_seconds_token_valid%']
+
+    noahglaser.tokenauth.security.loginsuccesshandler:
+        class:  NoahGlaser\TokenAuthBundle\Security\LoginSuccessHandler
+        arguments:  [ @router, @security.context]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
