@@ -79,7 +79,6 @@ class UserController extends FOSRestController
      *           "class"   = "API\VersionOneBundle\APIObjects\User",
      *           "parsers" = {
      *               "Nelmio\ApiDocBundle\Parser\JmsMetadataParser",
-     *               "Nelmio\ApiDocBundle\Parser\ValidationParser"
      *           },
      *           "groups" = {"adduser"}
      *          },

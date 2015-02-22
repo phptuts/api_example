@@ -21,17 +21,7 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        
-#        token_auth:
-#            pattern: /token/generate_token
-#            security: true
-#            form_login: false
-#            anonymous: false
-#            http_basic:
-#                provider: api_db_user_provider
-
-        
-        
+                
         token_auth_part_one:
             pattern: ^/token
             anonymous: true

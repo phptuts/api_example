@@ -25,6 +25,7 @@
         "noahglaser/ajaxvalidationbundle": "dev-master",
         "willdurand/hateoas-bundle": "0.4.*",
         "nelmio/api-doc-bundle": "~2.7",
+        "noahglaser/tokenauth": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "require-dev": {
