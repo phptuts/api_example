@@ -83,6 +83,13 @@ class UserProperteryController extends FOSRestController
         {
             return array('errors' => 'value must not be null');
         }
+                
+        $user = $this->getDoctrine()->getRepository('APIDatabaseBundle:User')->find($userId);
+
+        if(!$this->container->get('security.authorization_checker')->isGranted('user_edit', $user))
+        {
+            throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException();
+        }
         
         $this->get('api_version_one.mappers.database.userpropertiesdatatransfer')
                 ->updateProperty($propertyId, $userId, $value);
