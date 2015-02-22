@@ -21,6 +21,7 @@ class User extends Base implements AdvancedUserInterface, \Serializable, TokenUs
     public function __construct()
     {
         $this->tokens = new ArrayCollection();
+        $this->userproperties = new ArrayCollection();
     }
  
     /**
@@ -31,7 +32,7 @@ class User extends Base implements AdvancedUserInterface, \Serializable, TokenUs
     
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="UserProperties", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserProperties", mappedBy="user", cascade={"all"})
      */
     protected $userproperties;
     
@@ -55,6 +56,13 @@ class User extends Base implements AdvancedUserInterface, \Serializable, TokenUs
      * @ORM\Column(name="email", type="string", length=200)
      */
     private $email;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="secretkey", type="string", length=200, nullable=true)
+     */
+    private $secretKey;
 
     /**
      * @var array
@@ -313,5 +321,15 @@ class User extends Base implements AdvancedUserInterface, \Serializable, TokenUs
         $this->userproperties->removeElement($property);
     }
 
+    public function setSecretKey($secretKey)
+    {
+        $this->secretKey = $secretKey;
+        return $this;
+    }
+    
+    public function getSecretKey()
+    {
+        return $this->secretKey;
+    }
 
 }

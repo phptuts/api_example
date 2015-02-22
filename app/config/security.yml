@@ -36,13 +36,13 @@ security:
             pattern: ^/token
             anonymous: true
             security: true
-            
             form_login:
                 check_path: /token/login_check
                 login_path: ~
                 use_forward:    false
                 success_handler: noahglaser.tokenauth.security.loginsuccesshandler
-                failure_path:   null
+                failure_path:   noah_glaser_bad_login
+                provider: api_db_user_provider
             logout:
                 path:   /logout
                 target: / 
@@ -50,6 +50,7 @@ security:
         api_security:
             pattern: ^/api/*
             stateless: true
+            anonymous: true
             simple_preauth:
                 authenticator: apikey_authenticator
         

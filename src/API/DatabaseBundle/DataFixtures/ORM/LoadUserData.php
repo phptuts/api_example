@@ -5,6 +5,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use API\DatabaseBundle\Entity\User;
+use API\DatabaseBundle\Entity\UserProperties;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -40,6 +41,18 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         
         $user->setPassword($encoder->encodePassword('password', $user->getSalt()));
 
+        $prop1 = new UserProperties();
+        $prop1->setName('facebook');
+        $prop1->setValue('noah.glaser.75');
+        
+        $user->addUserproperty($prop1);
+        
+        $prop2 = new UserProperties();
+        $prop2->setName('twitter');
+        $prop2->setValue('thesqlman');
+        
+        $user->addUserproperty($prop2);
+        
         $manager->persist($user);
         $manager->flush();
     }

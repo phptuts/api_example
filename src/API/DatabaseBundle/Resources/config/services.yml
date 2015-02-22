@@ -5,3 +5,14 @@ services:
         factory_method: getRepository
         arguments:
             - API\DatabaseBundle\Entity\User
+
+    api.database.entity.repo.userproperty:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - API\DatabaseBundle\Entity\UserProperties
+    api.database.security.voter.uservoter:
+        class: API\DatabaseBundle\Security\Voter\UserVoter
+        tags:
+            - { name: security.voter }

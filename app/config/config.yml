@@ -83,7 +83,7 @@ swiftmailer:
 fos_rest:
     view:
         view_response_listener: 'force' #This allows us to return an array and it will convert it into a json
-    disable_csrf_role: ROLE_USER  #Allows users with ROLE_USER to access the api
+    disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY  #Allows users with ROLE_USER to access the api
     #Gets rid of {_format} from the route
     routing_loader:
         default_format: json #sets the default format to json
@@ -92,5 +92,10 @@ fos_rest:
 sensio_framework_extra:
     view:    { annotations: false }
     
-nelmio_api_doc: ~
+nelmio_api_doc: 
+    sandbox:
+        request_format:
+            method: accept_header    
+
+
 

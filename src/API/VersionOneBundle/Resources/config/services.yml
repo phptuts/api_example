@@ -1,4 +1,33 @@
 services:
-#    api_version_one.example:
-#        class: API\VersionOneBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+
+    
+    api_version_one.mappers.database.userdatatransfer:
+        class: API\VersionOneBundle\Mappers\Database\UserDataTransfer
+        arguments: [@doctrine.orm.entity_manager, @api.database.entity.repo.user, @security.encoder_factory]
+
+    api_version_one.mappers.database.userpropertiesdatatransfer:
+        class: API\VersionOneBundle\Mappers\Database\UserPropertiesDataTransfer
+        arguments: [@doctrine.orm.entity_manager, @api.database.entity.repo.userproperty, @api.database.entity.repo.user]
+
+    api_version_one.form.adduser:
+        class: API\VersionOneBundle\Form\AddUser
+        tags:
+            - { name: form.type, alias: adduser }
+    
+    api_version_one.form.edituser:
+        class: API\VersionOneBundle\Form\EditUser
+        tags:
+            - { name: form.type, alias: edituser }
+
+
+    api_version_one.validator.constraint.duplicatevalidator:
+        class: API\VersionOneBundle\Validator\Constraint\DuplicateFieldValidator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: api_one_duplicate_db }
+
+    api_version_one.validator.constraint.duplicateeditvalidator:
+        class: API\VersionOneBundle\Validator\Constraint\DuplicateFieldEditValidator
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: validator.constraint_validator, alias: api_one_duplicate_edit_db }

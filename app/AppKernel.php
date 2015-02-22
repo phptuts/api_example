@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new NoahGlaser\EntityBundle\NoahGlaserEntityBundle(),
             new NoahGlaser\TokenAuthBundle\NoahGlaserTokenAuthBundle(),
+            new NoahGlaser\ValidationBundle\NoahGlaserValidationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

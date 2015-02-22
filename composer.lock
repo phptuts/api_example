@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "775673836310831a01e4ce1d173124ec",
+    "hash": "491761fee22c275e2b3175f23c07bcf6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1506,6 +1506,43 @@
             "time": "2014-07-30 09:11:08"
         },
         {
+            "name": "noahglaser/ajaxvalidationbundle",
+            "version": "dev-master",
+            "target-dir": "NoahGlaser/ValidationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phptuts/ajaxvalidationbundle.git",
+                "reference": "47ff5933594e7c28cf348e98b5b1794d8cef76fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phptuts/ajaxvalidationbundle/zipball/47ff5933594e7c28cf348e98b5b1794d8cef76fa",
+                "reference": "47ff5933594e7c28cf348e98b5b1794d8cef76fa",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "NoahGlaser\\ValidationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Noah Glaser",
+                    "email": "noah.php@gmail.com"
+                }
+            ],
+            "description": "It provides a service and url for ajax validation that will valdiate all symfony forms without options.",
+            "time": "2015-02-20 23:27:45"
+        },
+        {
             "name": "noahglaser/entitybundle",
             "version": "dev-master",
             "target-dir": "NoahGlaser/EntityBundle",
@@ -2551,7 +2588,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "noahglaser/entitybundle": 20
+        "noahglaser/entitybundle": 20,
+        "noahglaser/ajaxvalidationbundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

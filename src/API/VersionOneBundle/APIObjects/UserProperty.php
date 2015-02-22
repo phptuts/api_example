@@ -15,12 +15,15 @@ namespace API\VersionOneBundle\APIObjects;
 
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * 
  * @Hateoas\Relation(
  *      "self", 
- *      exclusion = @Hateoas\Exclusion(groups={"userproperty_list"}),
+ *      exclusion = @Hateoas\Exclusion(groups={"full_user"}),
  *       href = @Hateoas\Route(
  *         "api_1_get_user_property",
  *          parameters = { 
@@ -32,7 +35,7 @@ use JMS\Serializer\Annotation as JMS;
  * 
  * @Hateoas\Relation(
  *      "parent", 
- *      exclusion = @Hateoas\Exclusion(groups={"userproperty_list"}),
+ *      exclusion = @Hateoas\Exclusion(groups={"full_user"}),
  *       href = @Hateoas\Route(
  *         "api_1_get_user",
  *          parameters = { 
@@ -50,7 +53,7 @@ class UserProperty
     /** 
       * The user id 
       * @JMS\Until("1")
-      * @JMS\Groups({"userproperty_list"}) 
+      * @JMS\Groups({"userproperty_list", "full_user"}) 
       * @JMS\Type("integer")
       */
     public $userId;
@@ -58,7 +61,7 @@ class UserProperty
     /** 
       * The name of the property 
       * @JMS\Until("1")
-      * @JMS\Groups({"userproperty_list"}) 
+      * @JMS\Groups({"userproperty_list", "full_user"}) 
       * @JMS\Type("string")
       */
     public $name;
@@ -66,23 +69,26 @@ class UserProperty
     /** 
       * The properties actual value
       * @JMS\Until("1")
-      * @JMS\Groups({"userproperty_list"}) 
+      * @JMS\Groups({"userproperty_list", "full_user"}) 
       * @JMS\Type("string")
+      * @Assert\NotBlank(groups={"editproperty"}, message="user_value_blank")
       */
     public $value;
     
     /** 
       * The id of the property
       * @JMS\Until("1")
-      * @JMS\Groups({"userproperty_list"}) 
+      * @JMS\Groups({"userproperty_list", "full_user"}) 
       * @JMS\Type("integer")
+      * @Assert\NotBlank(groups={"editproperty"}, message="user_id_blank")
+      * 
       */
     public $id;
     
     /** 
       * The date the property was created
       * @JMS\Until("1")
-      * @JMS\Groups({"userproperty_list"}) 
+      * @JMS\Groups({"userproperty_list", "full_user"}) 
       * @JMS\Type("DateTime<'m/d/Y'>")
       */
     public $createdAt;
@@ -90,7 +96,7 @@ class UserProperty
     /** 
       * The date the property was updated
       * @JMS\Until("1")
-      * @JMS\Groups({"userproperty_details"}) 
+      * @JMS\Groups({"userproperty_details", "full_user"}) 
       * @JMS\Type("DateTime<'m/d/Y'>")
       */
     public $updatedAt;

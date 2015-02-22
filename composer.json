@@ -22,6 +22,7 @@
         "friendsofsymfony/rest-bundle": "~1.5",
         "jms/serializer-bundle": "0.13.*",
         "noahglaser/entitybundle": "dev-master",
+        "noahglaser/ajaxvalidationbundle": "dev-master",
         "willdurand/hateoas-bundle": "0.4.*",
         "nelmio/api-doc-bundle": "~2.7",
         "doctrine/doctrine-fixtures-bundle": "2.2.*"

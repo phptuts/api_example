@@ -16,7 +16,7 @@ class TokenRepository extends EntityRepository
     {
         $dql = "SELECT t FROM " . 
                "NoahGlaserTokenAuthBundle:Token t " .  
-               "WHERE t.expires > :rightnow  AND t.token = :token";
+               "WHERE t.expires > :rightnow  AND t.token = :token ORDER BY t.createdAt DESC";
         
         return $this->getEntityManager()
                     ->createQuery($dql)

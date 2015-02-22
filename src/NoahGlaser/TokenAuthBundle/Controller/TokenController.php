@@ -34,16 +34,11 @@ class TokenController extends Controller
 
     }
         
-    public function loginAction()
-    {
-       return $this->render('NoahGlaserTokenAuthBundle:Login:login.html.twig');
-    }
+  
     
     public function loginFailureAction()
     {
-                
-        return new JsonResponse(array("Login Failure"));
-
+        return new Response('invalid credentials', 401);
     }
     
 }

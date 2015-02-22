@@ -45,14 +45,18 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
         $apiKey = $token->getCredentials();
-        $username = $this->userProvider->getUsernameForApiKey($apiKey);
-
-        if (!$username) 
+        try
+        {
+            $username = $this->userProvider->getUsernameForApiKey($apiKey);
+        }
+        catch (\Exception $ex)
         {
             throw new AuthenticationException(
                 sprintf('API Key "%s" does not exist.', $apiKey)
             );
         }
+
+        
 
         $user = $this->userProvider->loadUserByUsername($username);
 

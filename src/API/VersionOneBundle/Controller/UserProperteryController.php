@@ -19,17 +19,20 @@ class UserProperteryController extends FOSRestController
      *               "Nelmio\ApiDocBundle\Parser\JmsMetadataParser",
      *               "Nelmio\ApiDocBundle\Parser\ValidationParser"
      *           },
-     *           "groups" = {"userproperty_details", "userproperty_list"}
+     *           "groups" = {"full_user"}
      *       }) 
      * @FOS\View(
-     *  serializerGroups={"userproperty_details", "userproperty_list"},
+     *  serializerGroups={"full_user"},
      * )     
-     * @param Request $request
      * @param integer $userId the of user we are getting the properties for
      */
     public function getPropertiesAction(Request $request, $userId)
     {
+        $properties = $this
+                ->get('api_version_one.mappers.database.userpropertiesdatatransfer')
+                ->getUserProperties($userId);
         
+        return ['properties' => $properties];
     }
     
     /** 
@@ -40,7 +43,7 @@ class UserProperteryController extends FOSRestController
      *               "Nelmio\ApiDocBundle\Parser\JmsMetadataParser",
      *               "Nelmio\ApiDocBundle\Parser\ValidationParser"
      *           },
-     *           "groups" = {"userproperty_details", "userproperty_list"}
+     *           "groups" = {"full_user"}
      *       })      
      * @param Request $request
      * @param int $userId the id of the user property
@@ -48,17 +51,46 @@ class UserProperteryController extends FOSRestController
      */
     public function getPropertyAction(Request $request, $userId, $propertyId)
     {
+       $property = $this
+                ->get('api_version_one.mappers.database.userpropertiesdatatransfer')
+                ->getProperty($propertyId, $userId);
+                
         
+        return ['properties' => $property];
+
     }
     
     /**
      * Updates a user property
-     * @ApiDoc()
+     * @ApiDoc(parameters={
+     *      {"name"="value", "dataType"="string", "required"=true, "description"="The value you are updating"}
+     * },
+     *          output={
+     *           "class" = "API\VersionOneBundle\APIObjects\UserProperty",
+     *           "parsers" = {
+     *               "Nelmio\ApiDocBundle\Parser\JmsMetadataParser",
+     *               "Nelmio\ApiDocBundle\Parser\ValidationParser"
+     *           },
+     *           "groups" = {"userproperty_details", "userproperty_list"}
+     *       })
      * @param Request $request
      * @param type $userId
      */
-    public function putPropertyAction(Request $request, $userId, $propertyId)
+    public function patchPropertyAction(Request $request, $userId, $propertyId)
     {
-       
+        $value = $request->request->get('value');
+        if($value === null)
+        {
+            return array('errors' => 'value must not be null');
+        }
+        
+        $this->get('api_version_one.mappers.database.userpropertiesdatatransfer')
+                ->updateProperty($propertyId, $userId, $value);
+
+        $property = $this
+                ->get('api_version_one.mappers.database.userpropertiesdatatransfer')
+                ->getProperty($propertyId, $userId);
+        return ['properties' => $property];
+
     }
 }
